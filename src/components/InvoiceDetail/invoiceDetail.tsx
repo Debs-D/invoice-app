@@ -25,7 +25,7 @@ function StatusBadge({ status }: { status: InvoiceStatus }) {
   );
 }
 
-const btnBase = 'inline-flex items-center justify-center rounded-3xl font-bold text-[12px] tracking-[-0.25px] px-6 py-[17px] transition-colors duration-200 whitespace-nowrap border-0 cursor-pointer';
+const btnBase = 'inline-flex items-center justify-center rounded-full font-bold text-[12px] tracking-[-0.25px] px-7 py-[17px] transition-colors duration-200 whitespace-nowrap border-0 cursor-pointer';
 
 interface InvoiceDetailProps {
   onEdit: (invoice: Invoice) => void;
@@ -56,7 +56,7 @@ export default function InvoiceDetail({ onEdit }: InvoiceDetailProps) {
   }
 
   return (
-    <div className="pb-28 md:pb-4">
+    <div className="">
       {/* Back button */}
       <button
         className="flex items-center gap-6 font-bold text-[12px] tracking-[-0.25px] text-[#0C0E16] dark:text-white hover:text-[#888EB0] dark:hover:text-[#888EB0] transition-colors duration-200 mb-8"
@@ -69,7 +69,7 @@ export default function InvoiceDetail({ onEdit }: InvoiceDetailProps) {
       </button>
 
       {/* Status bar */}
-      <div className="flex items-center justify-between bg-white dark:bg-[#1E2139] rounded-lg px-8 py-5 mb-4 shadow-[0_10px_10px_-10px_rgba(72,84,159,0.1)] dark:shadow-none">
+      <div className="flex items-center justify-between bg-white dark:bg-[#1E2139] rounded-xl px-8 py-6 mb-6 shadow-[0_4px_6px_-1px_rgba(72,84,159,0.1),0_10px_15px_-3px_rgba(72,84,159,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
         <div className="flex items-center gap-4 md:gap-5">
           <span className="text-[#888EB0] font-medium text-[12px]">Status</span>
           <StatusBadge status={invoice.status} />
@@ -101,10 +101,10 @@ export default function InvoiceDetail({ onEdit }: InvoiceDetailProps) {
       </div>
 
       {/* Invoice body */}
-      <div className="bg-white dark:bg-[#1E2139] rounded-lg p-6 md:p-12 shadow-[0_10px_10px_-10px_rgba(72,84,159,0.1)] dark:shadow-none">
+      <div className="bg-white dark:bg-[#1E2139] rounded-xl p-8 md:p-12 shadow-[0_4px_6px_-1px_rgba(72,84,159,0.1),0_10px_15px_-3px_rgba(72,84,159,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
 
         {/* Top row: ID + description / sender address */}
-        <div className="flex flex-col md:flex-row md:justify-between mb-[31px] md:mb-[21px]">
+        <div className="flex flex-col md:flex-row md:justify-between mb-10 md:mb-12">
           <div className="mb-8 md:mb-0">
             <p className="font-bold text-[12px] tracking-[-0.25px] text-[#0C0E16] dark:text-white">
               <span className="text-[#888EB0]">#</span>{invoice.id}
@@ -120,7 +120,7 @@ export default function InvoiceDetail({ onEdit }: InvoiceDetailProps) {
         </div>
 
         {/* Meta grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 mb-[38px] md:mb-[48px]">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-10 mb-12 md:mb-16">
           <div className="flex flex-col gap-8">
             <div>
               <p className="text-[#888EB0] font-medium text-[12px] mb-[13px]">Invoice Date</p>

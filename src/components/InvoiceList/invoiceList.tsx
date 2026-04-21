@@ -74,9 +74,9 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
     : `There are ${count} total invoice${count !== 1 ? 's' : ''}`;
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-200px)]">
+    <div className="flex flex-col flex-1">
       {/* Header */}
-      <header className="flex items-center justify-between mb-8 md:mb-14">
+      <header className="flex items-center justify-between mb-10 md:mb-16">
         <div>
           <h1 className="text-[32px] font-bold tracking-[-1px] text-[#0C0E16] dark:text-white leading-[36px]">
             Invoices
@@ -113,22 +113,22 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
 
       {/* Invoice list or empty state */}
       {filteredInvoices.length === 0 ? (
-        <div className="flex-1 flex items-center justify-center">
+        <div className="flex-1 flex items-center justify-center ">
           <EmptyState />
         </div>
       ) : (
-        <ul className="flex flex-col gap-4" aria-label="Invoice list">
+        <ul className="flex flex-col gap-4 md:gap-5" aria-label="Invoice list">
           {filteredInvoices.map((inv: Invoice) => (
             <li key={inv.id}>
               <button
                 className="
                   w-full text-left
                   bg-white dark:bg-[#1E2139]
-                  rounded-lg border border-transparent
-                  hover:border-[#7C5DFA]
-                  px-6 py-[26px]
+                  rounded-xl border border-transparent
+                  hover:border-[#7C5DFA] dark:hover:border-[#7C5DFA]
+                  px-8 py-8
                   transition-all duration-200
-                  shadow-[0_10px_10px_-10px_rgba(72,84,159,0.1)]
+                  shadow-[0_4px_6px_-1px_rgba(72,84,159,0.1),0_10px_15px_-3px_rgba(72,84,159,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]
                 "
                 onClick={() => navigate(`/invoice/${inv.id}`)}
                 aria-label={`Invoice ${inv.id}, due ${formatDate(inv.paymentDue)}, ${formatCurrency(inv.total)}, ${inv.status}`}

@@ -27,14 +27,17 @@ export default function Sidebar() {
   const { theme, toggleTheme } = useInvoices();
 
   return (
+    /*
+     * Not fixed — lives in the normal flex flow alongside <main>.
+     * Mobile (flex-col parent): horizontal top bar, h-[72px], full width.
+     * Desktop (md:flex-row parent): vertical left column, w-[103px], full height.
+     */
     <nav
       className="
-        fixed z-40 bg-[#373B53]
-        top-0 left-0 right-0 h-[72px]
+        shrink-0 bg-[#373B53]
         flex flex-row items-center justify-between
-        rounded-br-[20px]
-        md:right-auto md:bottom-0 md:h-screen md:w-[103px]
-        md:flex-col md:rounded-r-[20px] md:rounded-br-[0px]
+        h-[72px] w-full rounded-br-[20px]
+        md:flex-col md:justify-start md:h-auto md:w-[103px] md:rounded-r-[20px] md:rounded-br-none
       "
     >
       {/* Logo */}
@@ -43,7 +46,7 @@ export default function Sidebar() {
           relative overflow-hidden shrink-0
           flex items-center justify-center bg-[#7C5DFA]
           w-[72px] h-[72px] rounded-br-[20px]
-          md:w-[103px] md:h-[103px]
+          md:w-[103px] md:h-[103px] md:rounded-br-none
         "
       >
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-[#9277FF] rounded-tl-[20px]" />
@@ -56,8 +59,8 @@ export default function Sidebar() {
         </svg>
       </div>
 
-      {/* Controls */}
-      <div className="flex flex-row items-center md:flex-col md:w-full">
+      {/* Controls — pushed to the end on desktop */}
+      <div className="flex flex-row items-center md:flex-col md:mt-auto md:w-full">
         <button
           onClick={toggleTheme}
           className="
@@ -70,6 +73,7 @@ export default function Sidebar() {
           {theme === 'light' ? <MoonIcon /> : <SunIcon />}
         </button>
 
+        {/* Divider: vertical on mobile, horizontal on desktop */}
         <div className="w-px h-[72px] bg-[#494E6E] md:h-px md:w-full" />
 
         <div className="flex items-center justify-center w-[72px] h-[72px] md:w-[103px] md:h-[80px]">

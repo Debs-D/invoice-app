@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import type { Invoice, InvoiceFormData } from '../types/invoice';
+import { sampleInvoices } from '../data/sampleInvoices';
 
 const STORAGE_KEY = 'inv-app-v1';
 const THEME_KEY   = 'inv-theme';
@@ -48,8 +49,10 @@ const Ctx = createContext<InvoiceContextValue | null>(null);
 
 export function InvoiceProvider({ children }: { children: React.ReactNode }) {
   const [invoices, setInvoices] = useState<Invoice[]>(() => {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]') || []; }
-    catch { return []; }
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
+      return Array.isArray(stored) && stored.length > 0 ? stored : sampleInvoices;
+    } catch { return sampleInvoices; }
   });
   const [filterStatus, setFilterStatus] = useState<string[]>([]);
   const [theme, setTheme] = useState<Theme>(
