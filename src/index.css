@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'League Spartan', sans-serif;
+  --color-inv-purple:    #7C5DFA;
+  --color-inv-purple-h:  #9277FF;
+  --color-inv-black:     #0C0E16;
+  --color-inv-dark:      #141625;
+  --color-inv-navy:      #1E2139;
+  --color-inv-navy-l:    #252945;
+  --color-inv-fog:       #DFE3FA;
+  --color-inv-slate:     #7E88C3;
+  --color-inv-muted:     #888EB0;
+  --color-inv-red:       #EC5757;
+  --color-inv-red-h:     #FF9797;
+  --color-inv-orange:    #FF8F00;
+  --color-inv-green:     #33D69F;
+  --color-inv-sidebar:   #373B53;
+  --color-inv-pale:      #F8F8FB;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'League Spartan', sans-serif;
+  font-size: 12px;
+  letter-spacing: -0.25px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #494E6E; border-radius: 4px; }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.4);
+  cursor: pointer;
+}
+
+.dark input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+}
