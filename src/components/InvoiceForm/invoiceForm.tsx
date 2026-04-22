@@ -22,8 +22,16 @@ function get(obj: Record<string, unknown>, path: string): string {
   }, obj) as string) ?? '';
 }
 
+function getFocusableElements(container: HTMLElement): HTMLElement[] {
+  return Array.from(
+    container.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter(el => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true');
+}
+
 const inputBase =
-  'w-full min-h-[56px] bg-white dark:bg-[#1F233A] border-2 border-[#C7D2FE] dark:border-[#3A4060] rounded-xl px-5 py-4 font-bold text-[14px] tracking-[-0.25px] text-[#0C0E16] dark:text-white placeholder:text-[#9AA4D1] focus:outline-none focus:border-[#7C5DFA] focus:ring-4 focus:ring-[#7C5DFA]/12 transition-colors duration-200 shadow-[inset_0_1px_1px_rgba(255,255,255,0.7)]';
+  'w-full min-h-[56px] bg-white dark:bg-[#1F233A] border-2 border-[#C7D2FE] dark:border-[#3A4060] rounded-xl px-5 py-4 font-bold text-[14px] tracking-[-0.25px] text-[#0C0E16] dark:text-white placeholder:text-[#9AA4D1] hover:border-[#A5B4FC] dark:hover:border-[#4E5680] focus:outline-none focus:border-[#7C5DFA] focus:ring-4 focus:ring-[#7C5DFA]/12 transition-colors duration-200 shadow-[inset_0_1px_1px_rgba(255,255,255,0.7)]';
 const labelBase = 'text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px]';
 const sectionTitle = 'text-[#7C5DFA] font-bold text-[13px] tracking-[-0.25px] mb-6 block';
 
@@ -56,10 +64,38 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const firstInputRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     firstInputRef.current?.focus();
-    function onKey(e: KeyboardEvent) { if (e.key === 'Escape') onClose(); }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+
+      if (e.key !== 'Tab' || !dialogRef.current) return;
+
+      const focusable = getFocusableElements(dialogRef.current);
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (e.shiftKey) {
+        if (!active || active === first || !dialogRef.current.contains(active)) {
+          e.preventDefault();
+          last.focus();
+        }
+        return;
+      }
+
+      if (!active || active === last || !dialogRef.current.contains(active)) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [onClose]);
@@ -148,6 +184,7 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
       >
         {/* Panel — intercepts clicks so they don't close the modal */}
         <div
+          ref={dialogRef}
           className="
             relative flex flex-col
             w-[calc(100%-24px)] max-w-[840px] h-[calc(100vh-24px)] max-h-[940px]
@@ -158,10 +195,11 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
           role="dialog"
           aria-modal="true"
           aria-label={isEdit ? `Edit Invoice #${invoice?.id}` : 'New Invoice'}
+          tabIndex={-1}
           onClick={e => e.stopPropagation()}
         >
           {/* Scrollable body */}
-          <div className="flex-1 overflow-y-auto px-7 md:px-12 lg:px-14 pt-16 md:pt-14 pb-10">
+          <div className="flex-1 overflow-y-auto px-8 md:px-14 lg:px-16 pt-16 md:pt-14 pb-10">
             <h2 className="text-[28px] font-bold tracking-[-0.5px] text-[#0C0E16] dark:text-white mb-10">
               {isEdit ? (
                 <>Edit <span className="text-[#888EB0]">#</span>{invoice?.id}</>
@@ -364,7 +402,7 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
           </div>
 
           {/* Sticky action bar */}
-          <div className="shrink-0 px-7 md:px-12 lg:px-14 py-6 bg-white dark:bg-[#1E2139] border-t border-[#DFE3FA] dark:border-[#252945] shadow-[0_-8px_24px_rgba(72,84,159,0.08)] dark:shadow-[0_-8px_24px_rgba(0,0,0,0.35)] flex flex-wrap items-center justify-between gap-4 pb-[max(20px,env(safe-area-inset-bottom))]">
+          <div className="shrink-0 px-8 md:px-14 lg:px-16 py-6 bg-white dark:bg-[#1E2139] border-t border-[#DFE3FA] dark:border-[#252945] shadow-[0_-8px_24px_rgba(72,84,159,0.08)] dark:shadow-[0_-8px_24px_rgba(0,0,0,0.35)] flex flex-wrap items-center justify-between gap-4 pb-[max(20px,env(safe-area-inset-bottom))]">
             {!isEdit ? (
               <>
                 <div className="flex items-center">

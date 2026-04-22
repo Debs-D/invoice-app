@@ -22,6 +22,10 @@ export default function Filter() {
     );
   }
 
+  function showAll() {
+    setFilterStatus([]);
+  }
+
   return (
     <div className="relative" ref={ref}>
       <button
@@ -53,6 +57,35 @@ export default function Filter() {
           role="listbox"
           aria-label="Filter invoices by status"
         >
+          <label className="flex items-center gap-[13px] cursor-pointer group">
+            <input
+              type="checkbox"
+              className="sr-only"
+              checked={filterStatus.length === 0}
+              onChange={showAll}
+            />
+            <span
+              className={`
+                w-4 h-4 rounded-sm flex items-center justify-center shrink-0
+                border-2 transition-all duration-150
+                ${filterStatus.length === 0
+                  ? 'bg-[#7C5DFA] border-[#7C5DFA]'
+                  : 'border-[#DFE3FA] dark:border-[#4E527A] group-hover:border-[#7C5DFA]'
+                }
+              `}
+              aria-hidden="true"
+            >
+              {filterStatus.length === 0 && (
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                  <path d="M1 4l2.667 2.667L9 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              )}
+            </span>
+            <span className="font-bold text-[13px] tracking-[-0.25px] text-[#0C0E16] dark:text-white">
+              All
+            </span>
+          </label>
+
           {STATUSES.map(status => (
             <label
               key={status}

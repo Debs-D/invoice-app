@@ -69,7 +69,7 @@ export default function InvoiceDetail({ onEdit }: InvoiceDetailProps) {
       </button>
 
       {/* Status bar */}
-      <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between bg-white dark:bg-[#1E2139] rounded-2xl px-7 py-6 md:px-10 lg:px-12 mb-8 shadow-[0_10px_24px_rgba(72,84,159,0.10)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.28)]">
+      <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between bg-white dark:bg-[#1E2139] rounded-2xl px-8 py-8 md:px-12 lg:px-14 md:py-8 mb-8 shadow-[0_10px_24px_rgba(72,84,159,0.10)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.28)]">
         <div className="flex items-center justify-between md:justify-start gap-4 md:gap-5">
           <span className="text-[#888EB0] font-medium text-[13px]">Status</span>
           <StatusBadge status={invoice.status} />
@@ -101,7 +101,7 @@ export default function InvoiceDetail({ onEdit }: InvoiceDetailProps) {
       </div>
 
       {/* Invoice body */}
-      <div className="bg-white dark:bg-[#1E2139] rounded-2xl p-8 md:p-10 lg:p-12 shadow-[0_10px_24px_rgba(72,84,159,0.10)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.28)]">
+      <div className="bg-white dark:bg-[#1E2139] rounded-2xl p-8 md:p-14 lg:p-16 shadow-[0_10px_24px_rgba(72,84,159,0.10)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.28)]">
         <div className="w-full max-w-[820px] mx-auto">
 
           {/* Top row: ID + description / sender address */}
@@ -160,7 +160,7 @@ export default function InvoiceDetail({ onEdit }: InvoiceDetailProps) {
 
           {/* Items table */}
           <div className="rounded-xl overflow-hidden">
-            <div className="bg-[#F9FAFE] dark:bg-[#252945] px-7 md:px-8 lg:px-10 pt-7 md:pt-8 pb-8">
+            <div className="bg-[#F9FAFE] dark:bg-[#252945] px-8 md:px-10 lg:px-12 pt-8 md:pt-10 pb-10">
               <div className="hidden md:grid md:grid-cols-[minmax(220px,1fr)_64px_128px_128px] md:gap-x-6 md:mb-8">
                 <span className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px]">Item Name</span>
                 <span className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] text-center">QTY.</span>
@@ -195,7 +195,7 @@ export default function InvoiceDetail({ onEdit }: InvoiceDetailProps) {
               </div>
             </div>
 
-            <div className="bg-[#373B53] dark:bg-[#0C0E16] rounded-b-xl px-7 md:px-8 lg:px-10 py-8 flex items-center justify-between">
+            <div className="bg-[#373B53] dark:bg-[#0C0E16] rounded-b-xl px-8 md:px-10 lg:px-12 py-8 flex items-center justify-between">
               <span className="text-white font-medium text-[13px]">Amount Due</span>
               <span className="text-white font-bold text-[24px] md:text-[28px] tracking-[-0.63px]">
                 {formatCurrency(invoice.total)}

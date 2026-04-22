@@ -74,7 +74,7 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
     : `There are ${count} total invoice${count !== 1 ? 's' : ''}`;
 
   return (
-    <div className="flex flex-col flex-1 w-full max-w-[920px] mx-auto">
+    <div className="flex flex-col w-full min-w-0 max-w-[920px] mx-auto">
       {/* Header */}
       <header className="flex items-end justify-between gap-6 mb-14 md:mb-18 px-1 sm:px-0">
         <div>
@@ -113,7 +113,7 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
 
       {/* Invoice list or empty state */}
       {filteredInvoices.length === 0 ? (
-        <div className="flex-1 flex items-center justify-center ">
+        <div className="flex items-center justify-center min-h-[60vh]">
           <EmptyState />
         </div>
       ) : (
@@ -126,7 +126,7 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
                   bg-white dark:bg-[#1E2139]
                   rounded-xl border border-transparent
                   hover:border-[#7C5DFA] dark:hover:border-[#7C5DFA]
-                  px-7 py-6 md:px-10 lg:px-12 md:py-6
+                  px-8 py-8 md:px-12 lg:px-14 md:py-8
                   transition-all duration-200
                   shadow-[0_10px_24px_rgba(72,84,159,0.10)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.28)]
                 "
@@ -134,7 +134,7 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
                 aria-label={`Invoice ${inv.id}, due ${formatDate(inv.paymentDue)}, ${formatCurrency(inv.total)}, ${inv.status}`}
               >
                 {/* Mobile layout */}
-                <div className="md:hidden">
+                <div className="lg:hidden">
                   <div className="flex items-center justify-between mb-6">
                     <span className="font-bold text-[15px] tracking-[-0.25px] leading-none text-[#0C0E16] dark:text-white">
                       <span className="text-[#7E88C3]">#</span>{inv.id}
@@ -155,7 +155,7 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
                 </div>
 
                 {/* Desktop layout */}
-                <div className="hidden md:grid md:grid-cols-[110px_150px_minmax(170px,1fr)_140px_128px_14px] md:min-h-[48px] md:items-center md:gap-x-8">
+                <div className="hidden lg:grid lg:grid-cols-[110px_150px_minmax(170px,1fr)_140px_128px_14px] lg:min-h-[48px] lg:items-center lg:gap-x-8">
                   <span className="font-bold text-[15px] tracking-[-0.25px] leading-none text-[#0C0E16] dark:text-white">
                     <span className="text-[#7E88C3]">#</span>{inv.id}
                   </span>
