@@ -18,7 +18,7 @@ const statusMap: Record<InvoiceStatus, { bg: string; text: string; dot: string }
 function StatusBadge({ status }: { status: InvoiceStatus }) {
   const s = statusMap[status] ?? statusMap.draft;
   return (
-    <span className={`inline-flex items-center gap-2 min-w-[104px] justify-center px-4 py-[10px] rounded-md font-bold ${s.bg} ${s.text}`}>
+    <span className={`inline-flex min-h-[48px] items-center gap-2 min-w-[128px] justify-center px-5 py-3 rounded-xl font-bold leading-none ${s.bg} ${s.text}`}>
       <span className={`w-2 h-2 rounded-full shrink-0 ${s.dot}`} aria-hidden="true" />
       {status.charAt(0).toUpperCase() + status.slice(1)}
     </span>
@@ -74,33 +74,33 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
     : `There are ${count} total invoice${count !== 1 ? 's' : ''}`;
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col flex-1 w-full max-w-[920px] mx-auto">
       {/* Header */}
-      <header className="flex items-center justify-between mb-10 md:mb-16">
+      <header className="flex items-end justify-between gap-6 mb-14 md:mb-18 px-1 sm:px-0">
         <div>
-          <h1 className="text-[32px] font-bold tracking-[-1px] text-[#0C0E16] dark:text-white leading-[36px]">
+          <h1 className="text-[32px] md:text-[36px] font-bold tracking-[-1px] text-[#0C0E16] dark:text-white leading-[1.05]">
             Invoices
           </h1>
-          <p className="text-[#888EB0] font-medium mt-1 text-[12px]">
+          <p className="text-[#888EB0] font-medium mt-3 text-[13px] leading-[1.4]">
             {count === 0 ? 'No invoices' : subtitle}
           </p>
         </div>
 
-        <div className="flex items-center gap-[18px] md:gap-10">
+        <div className="flex items-center shrink-0 gap-5 md:gap-8">
           <Filter />
 
           <button
             onClick={onNewInvoice}
             aria-label="Create new invoice"
             className="
-              flex items-center gap-4
+              flex min-w-[148px] items-center justify-center gap-4 shadow-[0_10px_20px_rgba(124,93,250,0.18)]
               bg-[#7C5DFA] hover:bg-[#9277FF]
-              text-white font-bold text-[12px] tracking-[-0.25px]
-              rounded-3xl pl-2 pr-3 md:pr-4 py-2
-              transition-colors duration-200
+              text-white font-bold text-[13px] md:text-[13px] tracking-[-0.25px]
+              rounded-full pl-2 pr-4 md:pr-6 py-2
+              transition-all duration-200
             "
           >
-            <span className="flex items-center justify-center w-8 h-8 bg-white rounded-full shrink-0">
+            <span className="flex items-center justify-center w-8 h-8 md:w-9 md:h-9 bg-white rounded-full shrink-0">
               <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
                 <path d="M6.313 0v4.688H11v1.624H6.313V11H4.687V6.312H0V4.688h4.688V0z" fill="#7C5DFA"/>
               </svg>
@@ -117,36 +117,36 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
           <EmptyState />
         </div>
       ) : (
-        <ul className="flex flex-col gap-4 md:gap-5" aria-label="Invoice list">
+        <ul className="flex flex-col gap-5 md:gap-6" aria-label="Invoice list">
           {filteredInvoices.map((inv: Invoice) => (
             <li key={inv.id}>
               <button
                 className="
-                  w-full text-left
+                  w-full min-h-[96px] text-left
                   bg-white dark:bg-[#1E2139]
                   rounded-xl border border-transparent
                   hover:border-[#7C5DFA] dark:hover:border-[#7C5DFA]
-                  px-8 py-8
+                  px-7 py-6 md:px-10 lg:px-12 md:py-6
                   transition-all duration-200
-                  shadow-[0_4px_6px_-1px_rgba(72,84,159,0.1),0_10px_15px_-3px_rgba(72,84,159,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]
+                  shadow-[0_10px_24px_rgba(72,84,159,0.10)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.28)]
                 "
                 onClick={() => navigate(`/invoice/${inv.id}`)}
                 aria-label={`Invoice ${inv.id}, due ${formatDate(inv.paymentDue)}, ${formatCurrency(inv.total)}, ${inv.status}`}
               >
                 {/* Mobile layout */}
                 <div className="md:hidden">
-                  <div className="flex items-center justify-between mb-[22px]">
-                    <span className="font-bold text-[12px] tracking-[-0.25px] text-[#0C0E16] dark:text-white">
-                      <span className="text-[#888EB0]">#</span>{inv.id}
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="font-bold text-[15px] tracking-[-0.25px] leading-none text-[#0C0E16] dark:text-white">
+                      <span className="text-[#7E88C3]">#</span>{inv.id}
                     </span>
-                    <span className="text-[#888EB0] font-medium text-[12px]">{inv.clientName}</span>
+                    <span className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-none">{inv.clientName}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-[#888EB0] font-medium text-[12px] mb-2">
+                      <p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-none mb-3">
                         Due {formatDate(inv.paymentDue)}
                       </p>
-                      <p className="font-bold text-[16px] tracking-[-0.5px] text-[#0C0E16] dark:text-white">
+                      <p className="font-bold text-[16px] tracking-[-0.5px] leading-none text-[#0C0E16] dark:text-white">
                         {formatCurrency(inv.total)}
                       </p>
                     </div>
@@ -155,13 +155,13 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
                 </div>
 
                 {/* Desktop layout */}
-                <div className="hidden md:grid md:grid-cols-[103px_130px_1fr_110px_140px_20px] md:items-center md:gap-x-5">
-                  <span className="font-bold text-[12px] tracking-[-0.25px] text-[#0C0E16] dark:text-white">
-                    <span className="text-[#888EB0]">#</span>{inv.id}
+                <div className="hidden md:grid md:grid-cols-[110px_150px_minmax(170px,1fr)_140px_128px_14px] md:min-h-[48px] md:items-center md:gap-x-8">
+                  <span className="font-bold text-[15px] tracking-[-0.25px] leading-none text-[#0C0E16] dark:text-white">
+                    <span className="text-[#7E88C3]">#</span>{inv.id}
                   </span>
-                  <span className="text-[#888EB0] font-medium text-[12px]">Due {formatDate(inv.paymentDue)}</span>
-                  <span className="text-[#888EB0] font-medium text-[12px]">{inv.clientName}</span>
-                  <span className="font-bold text-[12px] tracking-[-0.25px] text-[#0C0E16] dark:text-white text-right pr-2">
+                  <span className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-none">Due {formatDate(inv.paymentDue)}</span>
+                  <span className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-none">{inv.clientName}</span>
+                  <span className="font-bold text-[15px] tracking-[-0.3px] leading-none text-[#0C0E16] dark:text-white text-right">
                     {formatCurrency(inv.total)}
                   </span>
                   <StatusBadge status={inv.status} />

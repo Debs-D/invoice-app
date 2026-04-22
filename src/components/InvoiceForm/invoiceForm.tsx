@@ -23,9 +23,9 @@ function get(obj: Record<string, unknown>, path: string): string {
 }
 
 const inputBase =
-  'w-full bg-white dark:bg-[#252945] border border-[#DFE3FA] dark:border-[#252945] rounded px-5 py-4 font-bold text-[12px] tracking-[-0.25px] text-[#0C0E16] dark:text-white placeholder:text-[#888EB0]/50 focus:outline-none focus:border-[#7C5DFA] transition-colors duration-200';
-const labelBase = 'text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[12px]';
-const sectionTitle = 'text-[#7C5DFA] font-bold text-[12px] tracking-[-0.25px] mb-6 block';
+  'w-full min-h-[56px] bg-white dark:bg-[#1F233A] border-2 border-[#C7D2FE] dark:border-[#3A4060] rounded-xl px-5 py-4 font-bold text-[14px] tracking-[-0.25px] text-[#0C0E16] dark:text-white placeholder:text-[#9AA4D1] focus:outline-none focus:border-[#7C5DFA] focus:ring-4 focus:ring-[#7C5DFA]/12 transition-colors duration-200 shadow-[inset_0_1px_1px_rgba(255,255,255,0.7)]';
+const labelBase = 'text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px]';
+const sectionTitle = 'text-[#7C5DFA] font-bold text-[13px] tracking-[-0.25px] mb-6 block';
 
 interface InvoiceFormProps {
   invoice: Invoice | null;
@@ -150,11 +150,10 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
         <div
           className="
             relative flex flex-col
-            w-full h-full
-            md:w-[616px] md:h-auto md:max-h-[90vh]
+            w-[calc(100%-24px)] max-w-[840px] h-[calc(100vh-24px)] max-h-[940px]
             bg-[#F8F8FB] dark:bg-[#141625]
-            md:rounded-2xl
-            overflow-hidden
+            rounded-2xl
+            overflow-hidden shadow-[0_30px_60px_rgba(12,14,22,0.22)]
           "
           role="dialog"
           aria-modal="true"
@@ -162,20 +161,20 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
           onClick={e => e.stopPropagation()}
         >
           {/* Scrollable body */}
-          <div className="flex-1 overflow-y-auto px-6 md:px-14 pt-[88px] md:pt-14 pb-8">
-            <h2 className="text-[24px] font-bold tracking-[-0.5px] text-[#0C0E16] dark:text-white mb-[46px]">
+          <div className="flex-1 overflow-y-auto px-7 md:px-12 lg:px-14 pt-16 md:pt-14 pb-10">
+            <h2 className="text-[28px] font-bold tracking-[-0.5px] text-[#0C0E16] dark:text-white mb-10">
               {isEdit ? (
                 <>Edit <span className="text-[#888EB0]">#</span>{invoice?.id}</>
               ) : 'New Invoice'}
             </h2>
 
-            <div className="flex flex-col gap-10">
+            <div className="flex flex-col gap-9">
               {/* Bill From */}
               <fieldset className="border-none p-0 m-0">
                 <legend className={sectionTitle}>Bill From</legend>
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-5">
                   {field({ label: 'Street Address', path: 'senderAddress.street' })}
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
                     {field({ label: 'City', path: 'senderAddress.city' })}
                     {field({ label: 'Post Code', path: 'senderAddress.postCode' })}
                     <div className="col-span-2 md:col-span-1">
@@ -188,11 +187,11 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
               {/* Bill To */}
               <fieldset className="border-none p-0 m-0">
                 <legend className={sectionTitle}>Bill To</legend>
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-5">
                   {field({ label: "Client's Name", path: 'clientName' })}
                   {field({ label: "Client's Email", path: 'clientEmail', type: 'email', placeholder: 'e.g. email@example.com' })}
                   {field({ label: 'Street Address', path: 'clientAddress.street' })}
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
                     {field({ label: 'City', path: 'clientAddress.city' })}
                     {field({ label: 'Post Code', path: 'clientAddress.postCode' })}
                     <div className="col-span-2 md:col-span-1">
@@ -205,8 +204,8 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
               {/* Dates & Terms */}
               <fieldset className="border-none p-0 m-0">
                 <legend className="sr-only">Invoice Details</legend>
-                <div className="flex flex-col gap-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="flex flex-col gap-[10px]">
                       <div className="flex justify-between items-center">
                         <label htmlFor="createdAt" className={`${labelBase} ${errors.createdAt ? '!text-[#EC5757]' : ''}`}>
@@ -268,7 +267,7 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
                 <h3 className="text-[18px] font-bold tracking-[-0.38px] text-[#777F98] mb-6">Item List</h3>
 
                 {form.items.length > 0 && (
-                  <div className="hidden md:grid md:grid-cols-[1fr_48px_100px_64px_18px] md:gap-x-4 md:mb-4">
+                  <div className="hidden md:grid md:grid-cols-[minmax(220px,1fr)_64px_120px_90px_18px] md:gap-x-4 md:mb-4">
                     <span className={labelBase}>Item Name</span>
                     <span className={`${labelBase} text-center`}>Qty.</span>
                     <span className={`${labelBase} text-right`}>Price</span>
@@ -277,11 +276,11 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
                   </div>
                 )}
 
-                <div className="flex flex-col gap-12 md:gap-4">
+                <div className="flex flex-col gap-10 md:gap-4">
                   {form.items.map((item, i) => {
                     const total = ((Number(item.quantity) || 0) * (Number(item.price) || 0)).toFixed(2);
                     return (
-                      <div key={i} className="flex flex-col md:grid md:grid-cols-[1fr_48px_100px_64px_18px] md:items-center md:gap-x-4 gap-6">
+                      <div key={i} className="flex flex-col md:grid md:grid-cols-[minmax(220px,1fr)_64px_120px_90px_18px] md:items-center md:gap-x-4 gap-6">
                         <div className="flex flex-col gap-[10px]">
                           <label htmlFor={`item-name-${i}`} className={`${labelBase} md:sr-only`}>Item Name</label>
                           <input
@@ -322,14 +321,14 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
 
                           <div className="flex flex-col justify-end gap-[10px] h-full md:justify-center">
                             <span className={`${labelBase} md:sr-only`} aria-hidden="true">Total</span>
-                            <span className="font-bold text-[#888EB0] text-[12px] tracking-[-0.25px] py-4 md:text-right">
+                            <span className="font-bold text-[#888EB0] text-[13px] tracking-[-0.25px] py-4 md:text-right">
                               {total}
                             </span>
                           </div>
 
                           <button
                             type="button"
-                            className="flex items-end justify-center pb-[18px] md:pb-0 md:items-center text-[#888EB0] hover:text-[#EC5757] transition-colors duration-200"
+                            className="flex items-end justify-center pb-[18px] md:pb-0 md:items-center text-[#7E88C3] hover:text-[#EC5757] transition-colors duration-200"
                             onClick={() => removeItem(i)}
                             aria-label={`Remove item ${item.name || i + 1}`}
                           >
@@ -350,7 +349,7 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
                 <button
                   type="button"
                   onClick={addItem}
-                  className="mt-6 w-full py-[18px] rounded-full font-bold text-[12px] tracking-[-0.25px] bg-[#F9FAFE] dark:bg-[#252945] text-[#7E88C3] hover:bg-[#DFE3FA] dark:hover:bg-[#1E2139] transition-colors duration-200"
+                  className="mt-6 w-full py-[18px] rounded-full font-bold text-[13px] tracking-[-0.25px] bg-[#F9FAFE] dark:bg-[#252945] text-[#7E88C3] hover:bg-[#DFE3FA] dark:hover:bg-[#1E2139] transition-colors duration-200"
                 >
                   + Add New Item
                 </button>
@@ -365,27 +364,29 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
           </div>
 
           {/* Sticky action bar */}
-          <div className="shrink-0 px-6 md:px-14 py-6 bg-white dark:bg-[#1E2139] shadow-[0_-8px_24px_rgba(72,84,159,0.1)] dark:shadow-[0_-8px_24px_rgba(0,0,0,0.4)] flex items-center gap-3">
+          <div className="shrink-0 px-7 md:px-12 lg:px-14 py-6 bg-white dark:bg-[#1E2139] border-t border-[#DFE3FA] dark:border-[#252945] shadow-[0_-8px_24px_rgba(72,84,159,0.08)] dark:shadow-[0_-8px_24px_rgba(0,0,0,0.35)] flex flex-wrap items-center justify-between gap-4 pb-[max(20px,env(safe-area-inset-bottom))]">
             {!isEdit ? (
               <>
-                <button
-                  type="button"
-                  className="inline-flex items-center justify-center rounded-full font-bold text-[12px] tracking-[-0.25px] px-7 py-[17px] bg-[#F9FAFE] text-[#7E88C3] hover:bg-[#DFE3FA] dark:bg-[#252945] dark:text-[#DFE3FA] dark:hover:bg-[#DFE3FA] dark:hover:text-[#0C0E16] transition-colors duration-200 border-0 cursor-pointer"
-                  onClick={onClose}
-                >
-                  Discard
-                </button>
-                <div className="flex items-center gap-3 ml-auto">
+                <div className="flex items-center">
                   <button
                     type="button"
-                    className="inline-flex items-center justify-center rounded-full font-bold text-[12px] tracking-[-0.25px] px-7 py-[17px] bg-[#373B53] text-[#DFE3FA] hover:bg-[#0C0E16] transition-colors duration-200 border-0 cursor-pointer"
+                    className="inline-flex items-center justify-center rounded-full font-bold text-[13px] tracking-[-0.25px] px-7 py-[17px] bg-[#F9FAFE] text-[#7E88C3] hover:bg-[#DFE3FA] dark:bg-[#252945] dark:text-[#DFE3FA] dark:hover:bg-[#DFE3FA] dark:hover:text-[#0C0E16] transition-colors duration-200 border-0 cursor-pointer"
+                    onClick={onClose}
+                  >
+                    Discard
+                  </button>
+                </div>
+                <div className="flex flex-wrap items-center justify-end gap-3 sm:ml-auto">
+                  <button
+                    type="button"
+                    className="inline-flex min-w-[140px] items-center justify-center rounded-full font-bold text-[13px] tracking-[-0.25px] px-7 py-[17px] bg-[#1E2139] text-white hover:bg-[#0C0E16] dark:bg-[#373B53] dark:text-[#F9FAFE] transition-colors duration-200 border-0 cursor-pointer shadow-[0_8px_18px_rgba(30,33,57,0.16)]"
                     onClick={() => handleSubmit(true)}
                   >
                     Save as Draft
                   </button>
                   <button
                     type="button"
-                    className="inline-flex items-center justify-center rounded-full font-bold text-[12px] tracking-[-0.25px] px-7 py-[17px] bg-[#7C5DFA] text-white hover:bg-[#9277FF] transition-colors duration-200 border-0 cursor-pointer"
+                    className="inline-flex min-w-[140px] items-center justify-center rounded-full font-bold text-[13px] tracking-[-0.25px] px-7 py-[17px] bg-[#7C5DFA] text-white hover:bg-[#9277FF] transition-colors duration-200 border-0 cursor-pointer shadow-[0_12px_24px_rgba(124,93,250,0.22)]"
                     onClick={() => handleSubmit(false)}
                   >
                     Save &amp; Send
@@ -394,20 +395,24 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
               </>
             ) : (
               <>
-                <button
-                  type="button"
-                  className="inline-flex items-center justify-center rounded-full font-bold text-[12px] tracking-[-0.25px] px-7 py-[17px] bg-[#F9FAFE] text-[#7E88C3] hover:bg-[#DFE3FA] dark:bg-[#252945] dark:text-[#DFE3FA] dark:hover:bg-[#DFE3FA] dark:hover:text-[#0C0E16] transition-colors duration-200 border-0 cursor-pointer"
-                  onClick={onClose}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  className="inline-flex items-center justify-center rounded-full font-bold text-[12px] tracking-[-0.25px] px-7 py-[17px] bg-[#7C5DFA] text-white hover:bg-[#9277FF] transition-colors duration-200 ml-auto border-0 cursor-pointer"
-                  onClick={() => handleSubmit(false)}
-                >
-                  Save Changes
-                </button>
+                <div className="flex items-center">
+                  <button
+                    type="button"
+                    className="inline-flex items-center justify-center rounded-full font-bold text-[13px] tracking-[-0.25px] px-7 py-[17px] bg-[#F9FAFE] text-[#7E88C3] hover:bg-[#DFE3FA] dark:bg-[#252945] dark:text-[#DFE3FA] dark:hover:bg-[#DFE3FA] dark:hover:text-[#0C0E16] transition-colors duration-200 border-0 cursor-pointer"
+                    onClick={onClose}
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <div className="flex items-center justify-end sm:ml-auto">
+                  <button
+                    type="button"
+                    className="inline-flex min-w-[150px] items-center justify-center rounded-full font-bold text-[13px] tracking-[-0.25px] px-7 py-[17px] bg-[#7C5DFA] text-white hover:bg-[#9277FF] transition-colors duration-200 border-0 cursor-pointer shadow-[0_12px_24px_rgba(124,93,250,0.22)]"
+                    onClick={() => handleSubmit(false)}
+                  >
+                    Save Changes
+                  </button>
+                </div>
               </>
             )}
           </div>

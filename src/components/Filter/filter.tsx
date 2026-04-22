@@ -25,7 +25,7 @@ export default function Filter() {
   return (
     <div className="relative" ref={ref}>
       <button
-        className="flex items-center gap-3 font-bold text-[12px] tracking-[-0.25px] text-[#0C0E16] dark:text-white hover:text-[#7C5DFA] dark:hover:text-[#7C5DFA] transition-colors duration-200"
+        className="flex items-center gap-3 font-bold text-[13px] tracking-[-0.25px] text-[#0C0E16] dark:text-white hover:text-[#7C5DFA] dark:hover:text-[#7C5DFA] transition-colors duration-200"
         onClick={() => setOpen(o => !o)}
         aria-haspopup="listbox"
         aria-expanded={open}
@@ -81,7 +81,7 @@ export default function Filter() {
                   </svg>
                 )}
               </span>
-              <span className="font-bold text-[12px] tracking-[-0.25px] text-[#0C0E16] dark:text-white capitalize">
+              <span className="font-bold text-[13px] tracking-[-0.25px] text-[#0C0E16] dark:text-white capitalize">
                 {status}
               </span>
             </label>

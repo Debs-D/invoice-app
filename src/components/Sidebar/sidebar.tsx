@@ -37,7 +37,7 @@ export default function Sidebar() {
         shrink-0 bg-[#373B53]
         flex flex-row items-center justify-between
         h-[72px] w-full rounded-br-[20px]
-        md:flex-col md:justify-start md:h-auto md:w-[103px] md:rounded-r-[20px] md:rounded-br-none
+        md:flex-col md:justify-start md:h-screen md:w-[103px] md:rounded-r-[20px] md:rounded-br-none
       "
     >
       {/* Logo */}
@@ -60,12 +60,12 @@ export default function Sidebar() {
       </div>
 
       {/* Controls — pushed to the end on desktop */}
-      <div className="flex flex-row items-center md:flex-col md:mt-auto md:w-full">
+      <div className="flex flex-row items-center md:flex-col md:mt-auto md:w-full md:pt-6">
         <button
           onClick={toggleTheme}
           className="
             flex items-center justify-center
-            w-[72px] h-[72px] md:w-[103px] md:h-[72px]
+            w-[72px] h-[72px] md:w-[103px] md:h-[88px]
             text-[#7E88C3] hover:text-white transition-colors duration-200
           "
           aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
@@ -76,11 +76,11 @@ export default function Sidebar() {
         {/* Divider: vertical on mobile, horizontal on desktop */}
         <div className="w-px h-[72px] bg-[#494E6E] md:h-px md:w-full" />
 
-        <div className="flex items-center justify-center w-[72px] h-[72px] md:w-[103px] md:h-[80px]">
+        <div className="flex items-center justify-center w-[72px] h-[72px] md:w-[103px] md:h-[112px]">
           <img
             src="https://api.dicebear.com/7.x/avataaars/svg?seed=invoice&backgroundColor=b6e3f4"
             alt="User avatar"
-            className="w-8 h-8 rounded-full"
+            className="w-10 h-10 rounded-full"
           />
         </div>
       </div>
