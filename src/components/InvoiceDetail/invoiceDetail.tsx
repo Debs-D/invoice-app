@@ -56,7 +56,7 @@ export default function InvoiceDetail({ onEdit }: InvoiceDetailProps) {
   }
 
   return (
-    <div className="w-full max-w-[920px] mx-auto">
+    <div className="mx-auto w-full max-w-[980px] px-4 sm:px-6 md:px-0">
       {/* Back button */}
       <button
         className="flex items-center gap-6 font-bold text-[13px] tracking-[-0.25px] text-[#0C0E16] dark:text-white hover:text-[#888EB0] dark:hover:text-[#888EB0] transition-colors duration-200 mb-8 px-1 sm:px-0"
@@ -69,29 +69,29 @@ export default function InvoiceDetail({ onEdit }: InvoiceDetailProps) {
       </button>
 
       {/* Status bar */}
-      <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between bg-white dark:bg-[#1E2139] rounded-2xl px-8 py-8 md:px-12 lg:px-14 md:py-8 mb-8 shadow-[0_10px_24px_rgba(72,84,159,0.10)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.28)]">
+      <div className="mb-8 flex flex-col gap-6 rounded-2xl bg-white px-6 py-6 shadow-[0_10px_24px_rgba(72,84,159,0.10)] dark:bg-[#1E2139] dark:shadow-[0_12px_28px_rgba(0,0,0,0.28)] sm:px-8 md:flex-row md:items-center md:justify-between md:px-8 md:py-5">
         <div className="flex items-center justify-between md:justify-start gap-4 md:gap-5">
           <span className="text-[#888EB0] font-medium text-[13px]">Status</span>
           <StatusBadge status={invoice.status} />
         </div>
-        <div className="hidden md:flex shrink-0 items-center justify-end gap-3 rounded-full bg-[#F9FAFE] dark:bg-[#141625] px-2 py-2">
+        <div className="hidden md:flex shrink-0 items-center justify-end gap-2">
           {invoice.status !== 'paid' && (
             <button
-              className={`${btnBase} bg-transparent text-[#7E88C3] dark:text-[#DFE3FA] hover:bg-[#DFE3FA] dark:hover:bg-[#252945] dark:hover:text-white`}
+              className={`${btnBase} bg-[#F9FAFE] text-[#7E88C3] hover:bg-[#DFE3FA] dark:bg-[#252945] dark:text-[#DFE3FA] dark:hover:bg-[#DFE3FA] dark:hover:text-[#0C0E16]`}
               onClick={() => onEdit(invoice)}
             >
               Edit
             </button>
           )}
           <button
-            className={`${btnBase} px-5 bg-[#EC5757] text-white hover:bg-[#FF9797] shadow-[0_10px_20px_rgba(236,87,87,0.22)]`}
+            className={`${btnBase} bg-[#EC5757] text-white hover:bg-[#FF9797]`}
             onClick={() => setShowModal(true)}
           >
             Delete
           </button>
           {invoice.status === 'pending' && (
             <button
-              className={`${btnBase} px-6 bg-[#7C5DFA] text-white hover:bg-[#9277FF] shadow-[0_12px_24px_rgba(124,93,250,0.22)]`}
+              className={`${btnBase} bg-[#7C5DFA] text-white hover:bg-[#9277FF]`}
               onClick={() => markAsPaid(id!)}
             >
               Mark as Paid
@@ -101,8 +101,8 @@ export default function InvoiceDetail({ onEdit }: InvoiceDetailProps) {
       </div>
 
       {/* Invoice body */}
-      <div className="bg-white dark:bg-[#1E2139] rounded-2xl p-8 md:p-14 lg:p-16 shadow-[0_10px_24px_rgba(72,84,159,0.10)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.28)]">
-        <div className="w-full max-w-[820px] mx-auto">
+      <div className="rounded-2xl bg-white p-6 shadow-[0_10px_24px_rgba(72,84,159,0.10)] dark:bg-[#1E2139] dark:shadow-[0_12px_28px_rgba(0,0,0,0.28)] sm:p-8 md:p-10 lg:p-12">
+        <div className="w-full">
 
           {/* Top row: ID + description / sender address */}
           <div className="flex flex-col gap-8 md:flex-row md:justify-between mb-10 md:mb-12">
@@ -206,7 +206,7 @@ export default function InvoiceDetail({ onEdit }: InvoiceDetailProps) {
       </div>
 
       {/* Mobile action bar */}
-      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-white dark:bg-[#1E2139] flex flex-wrap items-center justify-end gap-2 px-6 py-5 shadow-[0_-8px_24px_rgba(72,84,159,0.08)]">
+      <div className="fixed bottom-0 left-0 right-0 flex flex-wrap items-center justify-end gap-2 bg-white px-4 py-5 shadow-[0_-8px_24px_rgba(72,84,159,0.08)] dark:bg-[#1E2139] md:hidden">
         {invoice.status !== 'paid' && (
           <button
             className={`${btnBase} bg-[#F9FAFE] dark:bg-[#252945] text-[#7E88C3] dark:text-[#DFE3FA] hover:bg-[#DFE3FA]`}

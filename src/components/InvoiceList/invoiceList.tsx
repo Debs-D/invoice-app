@@ -74,29 +74,29 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
     : `There are ${count} total invoice${count !== 1 ? 's' : ''}`;
 
   return (
-    <div className="flex flex-col w-full min-w-0 max-w-[920px] mx-auto">
+    <div className="mx-auto flex w-full min-w-0 max-w-[820px] flex-col px-4  sm:px-6 md:px-0" >
       {/* Header */}
-      <header className="flex items-end justify-between gap-6 mb-14 md:mb-18 px-1 sm:px-0">
-        <div>
+      <header className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between md:mb-12">
+        <div className="space-y-3">
           <h1 className="text-[32px] md:text-[36px] font-bold tracking-[-1px] text-[#0C0E16] dark:text-white leading-[1.05]">
             Invoices
           </h1>
-          <p className="text-[#888EB0] font-medium mt-3 text-[13px] leading-[1.4]">
+          <p className="text-[#888EB0] font-medium text-[13px] leading-[1.4]">
             {count === 0 ? 'No invoices' : subtitle}
           </p>
         </div>
 
-        <div className="flex items-center shrink-0 gap-5 md:gap-8">
+        <div className="flex items-center justify-between gap-3 sm:shrink-0 sm:justify-end md:gap-6">
           <Filter />
 
           <button
             onClick={onNewInvoice}
             aria-label="Create new invoice"
             className="
-              flex min-w-[148px] items-center justify-center gap-4 shadow-[0_10px_20px_rgba(124,93,250,0.18)]
+              flex min-w-[140px] items-center justify-center gap-3 shadow-[0_10px_20px_rgba(124,93,250,0.18)]
               bg-[#7C5DFA] hover:bg-[#9277FF]
               text-white font-bold text-[13px] md:text-[13px] tracking-[-0.25px]
-              rounded-full pl-2 pr-4 md:pr-6 py-2
+              rounded-full pl-2 pr-4 md:pr-5 py-2
               transition-all duration-200
             "
           >
@@ -117,7 +117,7 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
           <EmptyState />
         </div>
       ) : (
-        <ul className="flex flex-col gap-5 md:gap-6" aria-label="Invoice list">
+        <ul className="flex flex-col gap-4 " aria-label="Invoice list">
           {filteredInvoices.map((inv: Invoice) => (
             <li key={inv.id}>
               <button
@@ -126,7 +126,7 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
                   bg-white dark:bg-[#1E2139]
                   rounded-xl border border-transparent
                   hover:border-[#7C5DFA] dark:hover:border-[#7C5DFA]
-                  px-8 py-8 md:px-12 lg:px-14 md:py-8
+                  px-6 py-6 sm:px-7 sm:py-7 md:px-8 md:py-7
                   transition-all duration-200
                   shadow-[0_10px_24px_rgba(72,84,159,0.10)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.28)]
                 "
@@ -135,15 +135,15 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
               >
                 {/* Mobile layout */}
                 <div className="lg:hidden">
-                  <div className="flex items-center justify-between mb-6">
+                  <div className="mb-5 flex items-start justify-between gap-4">
                     <span className="font-bold text-[15px] tracking-[-0.25px] leading-none text-[#0C0E16] dark:text-white">
                       <span className="text-[#7E88C3]">#</span>{inv.id}
                     </span>
-                    <span className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-none">{inv.clientName}</span>
+                    <span className="text-right text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-none">{inv.clientName}</span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-none mb-3">
+                  <div className="flex items-end justify-between gap-4">
+                    <div className="space-y-2">
+                      <p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-none">
                         Due {formatDate(inv.paymentDue)}
                       </p>
                       <p className="font-bold text-[16px] tracking-[-0.5px] leading-none text-[#0C0E16] dark:text-white">
@@ -155,7 +155,7 @@ export default function InvoiceList({ onNewInvoice }: InvoiceListProps) {
                 </div>
 
                 {/* Desktop layout */}
-                <div className="hidden lg:grid lg:grid-cols-[110px_150px_minmax(170px,1fr)_140px_128px_14px] lg:min-h-[48px] lg:items-center lg:gap-x-8">
+                <div className="hidden lg:grid lg:grid-cols-[88px_128px_1fr_112px_128px_14px] lg:min-h-[48px] lg:items-center lg:gap-x-4">
                   <span className="font-bold text-[15px] tracking-[-0.25px] leading-none text-[#0C0E16] dark:text-white">
                     <span className="text-[#7E88C3]">#</span>{inv.id}
                   </span>
