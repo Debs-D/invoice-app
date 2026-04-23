@@ -15,8 +15,8 @@ export default function Modal({ id, onConfirm, onCancel }: ModalProps) {
       contentLabel="Confirm Deletion"
       className="
         bg-white dark:bg-[#1E2139]
-        rounded-2xl p-10 md:p-14
-        w-[calc(100%-32px)] max-w-[560px]
+        rounded-2xl p-8 md:p-10
+        w-[calc(100%-24px)] max-w-[520px]
         outline-none mx-auto shadow-[0_30px_60px_rgba(12,14,22,0.25)]
       "
       overlayClassName="fixed inset-0 z-[200] flex items-center justify-center px-4 sm:px-6 bg-[rgba(0,0,0,0.5)]"

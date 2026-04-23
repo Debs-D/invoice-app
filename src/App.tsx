@@ -17,10 +17,10 @@ function AppInner() {
 
   return (
 
-    <div className="min-h-screen flex flex-col md:flex-row bg-[#F8F8FB] dark:bg-[#141625] transition-colors duration-300">
+    <div className="app-root">
       <Sidebar />
-      <main className="min-w-0 flex-1 flex flex-col items-center px-6 sm:px-10 md:px-16 lg:px-20">
-        <div className="w-full min-w-0 max-w-[960px] flex flex-col pt-14 md:pt-[104px] pb-14 md:pb-24">
+      <main className="app-main">
+        <div className="app-container">
           <Routes>
             <Route path="/" element={<InvoiceList onNewInvoice={openNew} />} />
             <Route path="/invoice/:id" element={<InvoiceDetail onEdit={openEdit} />} />

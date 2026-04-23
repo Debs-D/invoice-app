@@ -37,7 +37,7 @@ export default function Sidebar() {
         shrink-0 bg-[#373B53] z-20
         flex flex-row items-center justify-between
         h-[72px] w-full rounded-br-[20px]
-        md:flex-col md:justify-start md:h-screen md:w-[103px] md:rounded-r-[20px] md:rounded-br-none
+        md:flex-col  md:h-screen md:w-[103px] md:rounded-r-[20px] md:rounded-br-none
         md:sticky md:top-0 md:self-start
       "
     >
