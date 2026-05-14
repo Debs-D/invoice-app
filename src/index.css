@@ -28,68 +28,16 @@
   padding: 0;
 }
 
-html, body, #root {
-  min-height: 100%;
-}
-body {
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-}
-
 body {
   font-family: 'League Spartan', sans-serif;
   font-size: 15px;
   letter-spacing: -0.25px;
-  background-color: #F8F8FB;
   transition: background-color 0.3s, color 0.3s;
-  overflow-x: hidden;
-}
-
-.dark body {
-  background-color: #141625;
 }
 
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #494E6E; border-radius: 4px; }
-
-/* ===== LAYOUT =====
- * Top-level shells for the whole app. Edit padding/max-width HERE
- * instead of hunting through Tailwind strings. Breakpoints:
- *   base  — mobile       (<640px)
- *   sm    — large phone  (>=640px)
- *   md    — tablet       (>=768px)
- *   lg    — desktop      (>=1024px)
- */
-
-.app-root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-@media (min-width: 768px) {
-  .app-root { flex-direction: row; }
-}
-
-.app-main {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  justify-content: center;
-  padding: 32px 20px 96px;
-}
-
-@media (min-width: 640px) { .app-main { padding: 48px 32px 112px; } }
-@media (min-width: 768px) { .app-main { padding: 72px 48px 128px; } }
-@media (min-width: 1024px){ .app-main { padding: 72px 64px 128px; } }
-
-.app-container {
-  width: 100%;
-  min-width: 0;
-  max-width: 780px;             /* Figma canvas 730px + 50px breathing room */
-  display: flex;
-  flex-direction: column;
-}
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(0.4);

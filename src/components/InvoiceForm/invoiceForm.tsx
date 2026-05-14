@@ -177,21 +177,21 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
         aria-hidden="true"
       />
 
-  {/* Centered modal container — on desktop offset by sidebar width so it centers in the content area */}
-<div
-  className="fixed inset-0 z-[90] flex items-center justify-center p-4 sm:p-6 md:py-8 md:pl-[123px] md:pr-6"
-  aria-hidden="true"
->
-  {/* Panel — intercepts clicks so they don't close the modal */}
-  <div
-    ref={dialogRef}
-    className="
-      relative flex flex-col
-      w-full max-w-[920px] max-h-[calc(100vh-32px)] sm:max-h-[calc(100vh-48px)] md:max-h-[calc(100vh-64px)]
-      bg-[#F8F8FB] dark:bg-[#141625]
-      rounded-2xl
-      overflow-hidden shadow-[0_30px_60px_rgba(12,14,22,0.22)]
-    "
+      {/* Centered modal container — on desktop offset by sidebar width so it centers in the content area */}
+      <div
+        className="fixed inset-0 md:left-[103px] z-[90] flex items-center justify-center p-0 md:p-8"
+        aria-hidden="true"
+      >
+        {/* Panel — intercepts clicks so they don't close the modal */}
+        <div
+          ref={dialogRef}
+          className="
+            relative flex flex-col
+            w-[calc(100%-24px)] max-w-[840px] h-[calc(100vh-24px)] max-h-[940px]
+            bg-[#F8F8FB] dark:bg-[#141625]
+            rounded-2xl
+            overflow-hidden shadow-[0_30px_60px_rgba(12,14,22,0.22)]
+          "
           role="dialog"
           aria-modal="true"
           aria-label={isEdit ? `Edit Invoice #${invoice?.id}` : 'New Invoice'}
@@ -199,7 +199,7 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
           onClick={e => e.stopPropagation()}
         >
           {/* Scrollable body */}
-          <div className="flex-1 overflow-y-auto px-6 pt-10 pb-8 sm:px-8 md:px-12 md:pt-12 lg:px-14">
+          <div className="flex-1 overflow-y-auto px-8 md:px-14 lg:px-16 pt-16 md:pt-14 pb-10">
             <h2 className="text-[28px] font-bold tracking-[-0.5px] text-[#0C0E16] dark:text-white mb-10">
               {isEdit ? (
                 <>Edit <span className="text-[#888EB0]">#</span>{invoice?.id}</>
@@ -402,7 +402,7 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
           </div>
 
           {/* Sticky action bar */}
-          <div className="shrink-0 border-t border-[#DFE3FA] bg-white px-6 py-5 shadow-[0_-8px_24px_rgba(72,84,159,0.08)] dark:border-[#252945] dark:bg-[#1E2139] dark:shadow-[0_-8px_24px_rgba(0,0,0,0.35)] sm:px-8 md:px-12 lg:px-14 flex flex-wrap items-center justify-between gap-4 pb-[max(20px,env(safe-area-inset-bottom))]">
+          <div className="shrink-0 px-8 md:px-14 lg:px-16 py-6 bg-white dark:bg-[#1E2139] border-t border-[#DFE3FA] dark:border-[#252945] shadow-[0_-8px_24px_rgba(72,84,159,0.08)] dark:shadow-[0_-8px_24px_rgba(0,0,0,0.35)] flex flex-wrap items-center justify-between gap-4 pb-[max(20px,env(safe-area-inset-bottom))]">
             {!isEdit ? (
               <>
                 <div className="flex items-center">
